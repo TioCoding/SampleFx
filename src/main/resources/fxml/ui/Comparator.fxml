@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import com.jfoenix.controls.JFXSnackbar?>
+<StackPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.com.sample.view.ComparatorView">
+   <children>
+      <VBox spacing="20">
+         <Label styleClass="title-label">Comparación de resultados (Peru-Host)</Label>
+         <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+            <children>
+               <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <HBox spacing="10.0">
+                        <children>
+                           <JFXTextField fx:id="txtFileHost" labelFloat="true" promptText="Runtime Host File" HBox.hgrow="ALWAYS" />
+                           <JFXButton fx:id="btnFindHost" onAction="#onActionSearchFileHost" styleClass="button-find-file" text="..." />
+                        </children>
+                     </HBox>
+                     <JFXListView fx:id="listViewHost" VBox.vgrow="ALWAYS" />
+                     <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                        <children>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Casos:" />
+                                 <Label fx:id="lblCasoHost" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Repetidos" />
+                                 <Label fx:id="lblRepetidoHost" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Total:" />
+                                 <Label fx:id="lblTotalHost" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </HBox>
+                  </children>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </VBox>
+               <VBox alignment="CENTER" minWidth="100.0" spacing="30.0">
+                  <children>
+                     <JFXButton fx:id="btnGenerar" contentDisplay="BOTTOM" graphicTextGap="8.0" onAction="#onActionGenerateExcel" styleClass="button-comparator-generate" text="Generar Excel" textAlignment="CENTER" wrapText="true">
+                        <graphic>
+                           <MaterialDesignIconView fill="WHITE" glyphName="SYNC" style="-fx-font-size: 30" />
+                        </graphic>
+                     </JFXButton>
+                     <JFXSpinner fx:id="spinnerLoad" styleClass="spinner-comparator" />
+                  </children>
+               </VBox>
+               <VBox spacing="20.0" HBox.hgrow="ALWAYS">
+                  <children>
+                     <HBox spacing="10.0">
+                        <children>
+                           <JFXTextField fx:id="txtFilePeru" labelFloat="true" promptText="Runtime Peru File" HBox.hgrow="ALWAYS" />
+                           <JFXButton fx:id="btnFindPeru" onAction="#onActionSearchFilePeru" styleClass="button-find-file" text="..." />
+                        </children>
+                     </HBox>
+                     <JFXListView fx:id="listViewPeru" VBox.vgrow="ALWAYS" />
+                     <HBox alignment="CENTER_RIGHT" spacing="5.0">
+                        <children>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Casos:" />
+                                 <Label fx:id="lblCasoPeru" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Repetidos" />
+                                 <Label fx:id="lblRepetidoPeru" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                           <HBox spacing="2.0">
+                              <children>
+                                 <Label text="Total:" />
+                                 <Label fx:id="lblTotalPeru" style="-fx-font-family: &quot;Roboto Bold&quot;;" text="0" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </HBox>
+                  </children>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </VBox>
+            </children>
+         </HBox>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </VBox>
+      <JFXDialog fx:id="dialogLoadComparation">
+         <JFXDialogLayout>
+            <heading>
+               <Label>Creando el Excel de comparación ...</Label>
+            </heading>
+            <body>
+               <VBox>
+                  <HBox alignment="CENTER_RIGHT">
+                     <Label fx:id="lblIndexProgress" text="0" />
+                     <Label text="/" />
+                     <Label fx:id="lblTotalProgress" text="11" />
+                  </HBox>
+                  <JFXProgressBar fx:id="progressBarComparator" maxWidth="1.7976931348623157E308" progress="0.0" />
+               </VBox>
+            </body>
+            <actions>
+               <JFXButton fx:id="btnCancelarOperacion" styleClass="dialog-accept">Cancelar operación</JFXButton>
+            </actions>
+         </JFXDialogLayout>
+      </JFXDialog>
+   </children>
+</StackPane>
